@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python基础、多线程多进程学习 | Bliss的博客</title><meta name="author" content="Bliss"><meta name="copyright" content="Bliss"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python基础与多线程、进程的学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础、多线程多进程学习">
+<meta property="og:url" content="https://system-bliss.github.io/2023/05/05/Python%E5%9F%BA%E7%A1%80%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Bliss的博客">
+<meta property="og:description" content="Python基础与多线程、进程的学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305051355175.png">
+<meta property="article:published_time" content="2023-05-05T05:50:46.000Z">
+<meta property="article:modified_time" content="2023-05-05T14:44:29.107Z">
+<meta property="article:author" content="Bliss">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305051355175.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://system-bliss.github.io/2023/05/05/Python%E5%9F%BA%E7%A1%80%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python基础、多线程多进程学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-05 22:44:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Bliss的博客" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305051355175.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Bliss的博客"><span class="site-name">Bliss的博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Python基础、多线程多进程学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-05T05:50:46.000Z" title="发表于 2023-05-05 13:50:46">2023-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-05T14:44:29.107Z" title="更新于 2023-05-05 22:44:29">2023-05-05</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><h2 id="基础部分学习"><a href="#基础部分学习" class="headerlink" title="基础部分学习"></a>基础部分学习</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;10strbcd9   &#x27;</span></span><br><span class="line">str1 = <span class="string">&#x27;10str   bcd9&#x27;</span></span><br><span class="line">str2 = <span class="string">&#x27;   10str   bcd9   &#x27;</span></span><br><span class="line">str3 = <span class="string">&#x27;-a-b-c-&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.index(<span class="string">&#x27;0&#x27;</span>))</span><br><span class="line"><span class="comment">#print(str.index(&#x27;aaa&#x27;))#报错</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.find(<span class="string">&#x27;aaa&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.find(<span class="string">&#x27;9&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">max</span>(<span class="built_in">str</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.split())</span><br><span class="line"><span class="built_in">print</span>(str1.split())</span><br><span class="line"><span class="built_in">print</span>(str2.split())</span><br><span class="line"><span class="built_in">print</span>(str3.split(<span class="string">&#x27;-&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>见上述demo中 定义了一个字符串<code>str</code> 及字符串常用的函数。由<strong>引号</strong>(单引号、双引号、三对引号)包裹的字符、数字均为字符串。</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[:]</td>
+<td>切片操作</td>
+<td>根据索引截取所需字符串</td>
+</tr>
+<tr>
+<td>index()</td>
+<td>查找字符串中是否存在某个元素</td>
+<td>有则返回第一次出现的索引，无则报错</td>
+</tr>
+<tr>
+<td>find()</td>
+<td>查找字符串中是否存在某个元素</td>
+<td>有则返回第一次出现的索引，无则返回 -1</td>
+</tr>
+<tr>
+<td>split()</td>
+<td>字符串去空操作</td>
+<td>去除字符串中的空白符，并返还列表(若字符串中间存在空白符，则返回列表拥有两元素)</td>
+</tr>
+<tr>
+<td>split()</td>
+<td>字符串去空操作</td>
+<td>也可制定去除的符号，如’-a-b-c-‘，则开头两端返回 [‘’, ‘a’, ‘b’, ‘c’, ‘’]</td>
+</tr>
+</tbody></table>
+<p>上述代码运行如下图所示<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243982.png" alt="image-20230505203731901"></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>列表是Python中最基础的数据结构<code>a = [&#39;a&#39;,&#39;b&#39;,[&#39;aaa&#39;]]</code>，其中被<code>[]</code>包裹的内容为列表中的元素，含有3个元素分别为<code>a、 b</code>和列表<code>[&#39;aaa&#39;]</code>。列表中可嵌套列表、元组、字典、集合等数据结构。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;aaa&#x27;</span>],&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;这是字段&#x27;</span>&#125;,(<span class="string">&#x27;这是元组&#x27;</span>,),&#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;这是集合&#x27;</span>&#125;]	</span><br></pre></td></tr></table></figure>
+
+<p>上述变量<code>b</code>也为列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;aaa&#x27;</span>]]</span><br><span class="line">y = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,[<span class="string">&#x27;aaa&#x27;</span>],&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;b&#x27;</span>:<span class="string">&#x27;这是字段&#x27;</span>&#125;,(<span class="string">&#x27;这是元组&#x27;</span>,),&#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;这是集合&#x27;</span>&#125;]</span><br><span class="line">z = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(y)) <span class="comment">#列表长度</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">max</span>(z)) <span class="comment">#比较列表中最大的数</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">min</span>(z)) <span class="comment">#比较列表中最小的函数</span></span><br><span class="line"><span class="built_in">print</span>(x.pop()) <span class="comment">#删除最后一个元素，并返回该元素</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(x.remove(<span class="string">&#x27;a&#x27;</span>)) <span class="comment">#删除指定元素，无返回值</span></span><br><span class="line"><span class="keyword">del</span> y[<span class="number">3</span>] <span class="comment">#指定列表索引删除元素</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"><span class="built_in">print</span>(y)</span><br><span class="line">x.append(<span class="string">&#x27;ccc&#x27;</span>) <span class="comment">#列表末尾追加元素</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x.insert(<span class="number">0</span>,<span class="string">&quot;a&quot;</span>) <span class="comment">#列表索引位置追加元素</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br></pre></td></tr></table></figure>
+
+<p>上述<strong>demo</strong>运行如图所示，列表常用函数均已注释说明用法及区别</p>
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243555.png" alt="image-20230505210837035"></p>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p>特性：与上述介绍的<code>字符串</code>一致，均为不可变的数据结构。其他处与列表类似，元组使用小括号，列表使用方括号。</p>
+<p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。若元组只有一个元素需以<code>(&#39;元组&#39;,)</code>这种形式出现，单个元素后跟一个逗号，否则Python解释器默认其为 <code>(&#39;不是元组&#39;)</code> 字符串类型</p>
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243436.png" alt="image-20230505211440638"></p>
+<p>由于元组为不可变类型的数据结构，所以其函数只有通用的几个</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>min()</td>
+<td>比较元组中元素大小，返回最小的元素</td>
+<td>元组中最小的元素</td>
+</tr>
+<tr>
+<td>max()</td>
+<td>比较元组中元素大小，返回最大的元素</td>
+<td>元组中最大的元素</td>
+</tr>
+<tr>
+<td>tuple()</td>
+<td>将列表、字符串转换为元组</td>
+<td>列表元素不变输出元组，字符串单个字符为元素输出元组</td>
+</tr>
+</tbody></table>
+<p>测试<code>demo</code>如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="string">&#x27;aaaa&#x27;</span>,<span class="string">&#x27;b&#x27;</span>]</span><br><span class="line">b = <span class="string">&#x27;str&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">tuple</span>(a)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">tuple</span>(b)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">tuple</span>(a))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">tuple</span>(b))</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243773.png" alt="image-20230505212214838"></p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>字典是另一种可变容器模型，且可存储任意类型对象，且字典<strong>无序</strong>。其中字典的表现格式为<code>&#123; key : value &#125;</code>的格式，其中<code>key</code>的值保持唯一性，若重复，则后续<code>key</code>的<code>value</code>值会覆盖之前的<code>value</code> ,如<strong>demo</strong>为<code>a = &#123;&#39;a&#39;:1,&#39;a&#39;:2&#125;</code>，打印结果为：<code>&#123;&#39;a&#39;: 2&#125;</code>,会直接覆盖掉第一个键名为<code>a</code>的键值对。</p>
+<p>字典常见函数如下表：</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pop()</td>
+<td>根据Key名删除键值对</td>
+<td>返回删除的value</td>
+</tr>
+<tr>
+<td>del dict[keyname]</td>
+<td>根据Key名删除键值对</td>
+<td>无返回值</td>
+</tr>
+<tr>
+<td>dict[‘key’]</td>
+<td>若此前为引用的key名，则增加元素。引用过key名则修改value值</td>
+<td></td>
+</tr>
+<tr>
+<td>dict.get(‘keyname’)</td>
+<td>根据key名找value</td>
+<td>存在则输出value，反之输出None</td>
+</tr>
+<tr>
+<td>dict.keys()</td>
+<td>输出字典中所有key的列表集合对象 dict_keys</td>
+<td></td>
+</tr>
+<tr>
+<td>dict.values()</td>
+<td>输出字典中所有value的列表集合对象 dict_values</td>
+<td></td>
+</tr>
+<tr>
+<td>dict.items()</td>
+<td>输出字典中所有键值对的集合对象 dict_items</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>其中可将返回的 <code>dict_keys</code> <code>dict_values</code> <code>dict_items</code>三种类型对象看作一个迭代器，循环即可获得该值</p>
+<p>演示<strong>demo</strong>如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = &#123; <span class="string">&quot;a&quot;</span>:<span class="number">1</span>,<span class="string">&quot;a&quot;</span>:<span class="number">2</span>,<span class="string">&#x27;c&#x27;</span>:<span class="number">3</span> &#125;</span><br><span class="line"><span class="built_in">print</span>(a.keys())</span><br><span class="line"><span class="built_in">print</span>(a.values())</span><br><span class="line"><span class="built_in">print</span>(a.items())</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a.keys()))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a.values()))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a.items()))</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> a.keys():</span><br><span class="line">    <span class="built_in">print</span>(key)</span><br><span class="line">b = [(x,y) <span class="keyword">for</span> x,y <span class="keyword">in</span> a.items()]</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+
+<p>输出如图<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243593.png" alt="image-20230505215035255"></p>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p>集合为无序且不可重复元素的数据结构，集合大多数使用情况为去重 <code>set(具有重复元素的列表)</code>，无太多使用说明。</p>
+<p>集合的表达方式为： <code>&#123;a,b,c&#125;</code>采用大括号的方式</p>
+<h3 id="常用函数补充"><a href="#常用函数补充" class="headerlink" title="常用函数补充"></a>常用函数补充</h3><ul>
+<li><p>join()函数</p>
+<p>可使用该函数将列表的元素拼接为字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span>.join(a)</span><br></pre></td></tr></table></figure>
+
+<p><code>print(str)</code>的结果为 <code>abc</code>，也可使用<code>str = &#39; &#39;.join(a)</code>,<code>print(str)</code>的打印结果为<code>a b c</code></p>
+</li>
+<li><p>zip()函数</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">x = [<span class="string">&quot;x&quot;</span>,<span class="string">&quot;y&quot;</span>,<span class="string">&quot;z&quot;</span>]</span><br><span class="line">m = <span class="built_in">zip</span>(a,x)        <span class="comment">#zip对象返回的是一个zip类，浅显理解为：可迭代一次性对象</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(m))      <span class="comment"># &lt;class &#x27;zip&#x27;&gt;</span></span><br><span class="line">i = m.__next__()    <span class="comment">#(&#x27;a&#x27;, &#x27;x&#x27;)</span></span><br><span class="line"><span class="built_in">print</span>(i)</span><br><span class="line">i = m.__next__()    <span class="comment">#(&#x27;b&#x27;, &#x27;y&#x27;)</span></span><br><span class="line"><span class="built_in">print</span>(i)</span><br><span class="line">i = m.__next__()    <span class="comment">#(&#x27;c&#x27;, &#x27;z&#x27;)</span></span><br><span class="line"><span class="built_in">print</span>(i)</span><br><span class="line">i = m.__next__()    <span class="comment"># 打印三次之后，指针遍历完了zip对象的所有内容</span></span><br><span class="line"><span class="built_in">print</span>(i)            <span class="comment"># 访问一个迭代完的迭代器 --&gt;&gt; 报错 StopIteration</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>列表推导式学习</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [x  <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">9</span> == <span class="number">0</span>]</span><br><span class="line">以上代码输出结果为 ：[<span class="number">0</span>, <span class="number">9</span>]</span><br><span class="line">可将推导式变形为</span><br><span class="line">b = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> x % <span class="number">9</span> ==<span class="number">0</span>:</span><br><span class="line">        b.append(x)</span><br></pre></td></tr></table></figure>
+
+<p>优点 ：简化代码量。</p>
+<h2 id="多线程-x2F-进程的学习"><a href="#多线程-x2F-进程的学习" class="headerlink" title="多线程&#x2F;进程的学习"></a>多线程&#x2F;进程的学习</h2><h3 id="多线程-threading库简单学习"><a href="#多线程-threading库简单学习" class="headerlink" title="多线程-threading库简单学习"></a>多线程-threading库简单学习</h3><h4 id="可通过函数定义方法的模式引用多线程"><a href="#可通过函数定义方法的模式引用多线程" class="headerlink" title="可通过函数定义方法的模式引用多线程"></a>可通过函数定义方法的模式引用多线程</h4><p><strong>简单代码块引用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_name</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="built_in">print</span>(name,<span class="string">&quot;start&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        <span class="built_in">print</span>(name,i)</span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(name,<span class="string">&quot;end&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程start&quot;</span>)</span><br><span class="line">    t1 = Thread(target=print_name,args=(<span class="string">&quot;t1&quot;</span>,))</span><br><span class="line">    t2 = Thread(target=print_name,args=(<span class="string">&quot;t2&quot;</span>,))</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程end&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="可通过重写Thread类引用多线程"><a href="#可通过重写Thread类引用多线程" class="headerlink" title="可通过重写Thread类引用多线程"></a>可通过重写Thread类引用多线程</h4><p><strong>简单代码块引用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyThread</span>(<span class="title class_ inherited__">Thread</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        Thread.__init__(self)</span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(self.name, <span class="string">&quot;start&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">            <span class="built_in">print</span>(self.name, i)</span><br><span class="line">            sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(self.name, <span class="string">&quot;end&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程start&quot;</span>)</span><br><span class="line">    t1 = MyThread(<span class="string">&#x27;t1&#x27;</span>)</span><br><span class="line">    t2 = MyThread(<span class="string">&#x27;t2&#x27;</span>)</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程end&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="join方法"><a href="#join方法" class="headerlink" title="join方法"></a>join方法</h4><p>上述引用代码在执行时输出均为以下执行效果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">主线程start</span><br><span class="line">t1 start</span><br><span class="line">t1 0</span><br><span class="line">t2 start</span><br><span class="line">t2 0</span><br><span class="line">主线程end</span><br><span class="line">t1 1</span><br><span class="line">t2 1</span><br><span class="line">t1 2</span><br><span class="line">t2 2</span><br><span class="line">t2t1  endend</span><br></pre></td></tr></table></figure>
+
+<p>如图<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243642.png" alt="image-20230416135221696"></p>
+<p>当<code>t1</code>与<code>t2</code>线程调用<code>start()</code>方法后，打印出了<code>主线程end</code>，但是<code>t1 t2</code>并没有执行完，还在继续执行输出。<strong>注意：并不是打印了主线程end 就是主线程结束了，只是主线程没有等<code>t1 t2</code>线程结束，仍然在继续运行主线程</strong></p>
+<p>如果需要 <code>t1 t2</code>执行完成在继续执行主线程，可以调用 <code>join()</code>方法。代码块如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程start&quot;</span>)</span><br><span class="line">    t1 = MyThread(<span class="string">&#x27;t1&#x27;</span>)</span><br><span class="line">    t2 = MyThread(<span class="string">&#x27;t2&#x27;</span>)</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br><span class="line">    t1.join()</span><br><span class="line">    t2.join()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程end&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>增加<code>t1 t2</code>调用<code>join()</code>方法后执行效果如下<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243905.png" alt="image-20230416140316313"></p>
+<p>会需要当两个子进程<code>t1 t2</code>结束后，主线程才会继续运行</p>
+<h4 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h4><p>守护进程为 主进程结束后，守护进程也直接结束。使用方法为 <code>线程名.daemon = True</code>设置该线程对象的<code>daemon</code>属性为<code>True</code>如图</p>
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243429.png" alt="image-20230416140655433"></p>
+<p>当主线程打印 <code>主线程end</code>后 守护线程<code>t1</code>也就被结束了。</p>
+<p>这个时候有一个需要明确的<strong>重要的点</strong>，如下代码块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程start&quot;</span>)</span><br><span class="line">    t1 = MyThread(<span class="string">&#x27;t1&#x27;</span>)</span><br><span class="line">    t2 = MyThread(<span class="string">&#x27;t2&#x27;</span>)</span><br><span class="line">    t1.daemon = <span class="literal">True</span></span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;主线程end&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>两个子线程，但<code>t1</code>为守护线程，<code>t2</code>并没有守护线程的属性。所以该代码在运行时，执行效果如下<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243696.png" alt="image-20230416141043133"></p>
+<p>当主线程打印出 <code>主线程end</code>后，但守护进程<code>t1</code>仍然在继续执行。所以主线程的真正结束时间是: 所有非守护子线程运行结束后，才会结束主线程，同理守护子线程也会结束。因为非守护进程<code>t2</code>没有结束，所以主进程未结束，所以<code>t1</code>进程在主线程打印出<code>主线程end</code>后仍继续执行。</p>
+<h4 id="互斥锁及应用场景学习"><a href="#互斥锁及应用场景学习" class="headerlink" title="互斥锁及应用场景学习"></a>互斥锁及应用场景学习</h4><p>无互斥锁<code>demo</code>如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">账户</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,金额,户主</span>):</span><br><span class="line">        self.金额 = 金额</span><br><span class="line">        self.户主 = 户主</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">取钱</span>(<span class="title class_ inherited__">Thread</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,预取金额,账户,取款人</span>):</span><br><span class="line">        Thread.__init__(self)</span><br><span class="line">        self.预取金额 = 预取金额</span><br><span class="line">        self.账户 = 账户</span><br><span class="line">        self.取走金额 = <span class="number">0</span></span><br><span class="line">        self.取款人 = 取款人</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.预取金额 &gt; self.账户.金额: <span class="comment">#判断账户余额是否满足当前取钱的需求，避免金额为0</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line">        self.账户.金额 -= self.预取金额</span><br><span class="line">        self.取走金额 += self.预取金额</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;self.账户.户主&#125;</span>的账户余额为：<span class="subst">&#123;self.账户.金额&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;self.账户.户主&#125;</span>的账户 共被<span class="subst">&#123;self.取款人&#125;</span>取走 <span class="subst">&#123;self.取走金额&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>定义了两个类 账户类中说明了账户金额和账户的户主，取钱类会判断当前取钱的取款人，预取金额，取钱的账户和取款人。直接用下列代码调用该demo时会存在一个问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    老王 = 账户(<span class="number">100</span>,<span class="string">&quot;老王&quot;</span>)</span><br><span class="line">    t1 = 取钱(<span class="number">80</span>,老王,<span class="string">&quot;小明&quot;</span>)</span><br><span class="line">    t2 = 取钱(<span class="number">80</span>,老王,<span class="string">&quot;小李&quot;</span>)</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243307.png" alt="image-20230416141853919"></p>
+<p>两个线程同时访问账户的金额资源，账户余额会变成<code>-20</code>.很显然在生产环境是很可能遭遇到该情况，所以就需要引进一个概念，对访问资源加上<code>锁</code>。调用<code>threading</code>模块的<code>Lock()</code>方法，对资源加锁处理</p>
+<p><strong>互斥锁使用方法</strong>为: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">锁 = Lock() <span class="comment">#初始化 Lock()</span></span><br><span class="line">在需要对资源加锁处调用 `锁.acquire()`方法，当资源利用完后调用`锁.release()`对资源释放</span><br></pre></td></tr></table></figure>
+
+<p>原有demo加上锁后执行效果如下<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243865.png" alt="image-20230416142530797"></p>
+<p>当对该资源加锁后，避免了其他线程在使用中被人修改资源属性。</p>
+<h4 id="信号量的学习与场景"><a href="#信号量的学习与场景" class="headerlink" title="信号量的学习与场景"></a>信号量的学习与场景</h4><p>在互斥锁<code>Lock()</code>的学习使用中，可以限制资源只允许被一个线程访问，当该资源应该控制访问线程数量为一个区间时，互斥锁就无法满足需求了。引入新概念<code>信号量 Semaphore()</code>的学习。</p>
+<p><code>demo</code>如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">home</span>(<span class="params">name</span>): <span class="comment">#定义一个只能容纳2人的房子</span></span><br><span class="line">    x.acquire()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;当前<span class="subst">&#123;name&#125;</span>已经进入home中&quot;</span>)</span><br><span class="line">    sleep(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;当前<span class="subst">&#123;name&#125;</span>已走出房间&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(datetime.now().strftime(<span class="string">&quot;%H:%M:%S&quot;</span>))</span><br><span class="line">    x.release()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    x = Semaphore(<span class="number">2</span>)</span><br><span class="line">    t_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        t = Thread(target=home,args=(<span class="string">f&quot;<span class="subst">&#123;i&#125;</span>号玩家&quot;</span>,))</span><br><span class="line">        t_list.append(t)</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> t_list:</span><br><span class="line">        t.start()</span><br></pre></td></tr></table></figure>
+
+<p>运行该<code>demo</code>后输出效果如图<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243797.png" alt="image-20230417195228520"></p>
+<p>当该资源被两个线程访问时，其他线程均需等待。限制访问数量由<code>x = Semaphore(2)</code>决定。演示<code>demo</code>设置为2</p>
+<h4 id="生产者消费者queue学习"><a href="#生产者消费者queue学习" class="headerlink" title="生产者消费者queue学习"></a>生产者消费者<code>queue</code>学习</h4><p>引入新的概念如图<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243451.png" alt="image-20230417195902754"></p>
+<p>将线程分为生产者、消费者两类。一类生产数据、一类消费数据。引入新的<code>Python</code>库<code>queue</code></p>
+<p>用法如下：</p>
+<ol>
+<li>引入<code>queue</code>模块的<code>Queue</code>类</li>
+<li>初始化该类 <code>q = Queue()</code></li>
+<li>使用 <code>q.put()</code>对资源池进行添加资源的操作</li>
+<li>使用 <code>q.get()</code>从资源池中取出资源</li>
+</ol>
+<p>演示<code>demo</code>如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">生产者</span>():</span><br><span class="line">    name_list = [<span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>, <span class="string">&#x27;王五&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> q.qsize() &lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> name_list:</span><br><span class="line">            q.put(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;只能容纳两个人的大小&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">消费者</span>():</span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &gt;<span class="number">0</span>:</span><br><span class="line">        name = q.get()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;这是为<span class="subst">&#123;name&#125;</span>提供的食物&#x27;</span>)</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    q = Queue()</span><br><span class="line">    t1 = Thread(target=生产者)</span><br><span class="line">    t2 = Thread(target=消费者)</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br></pre></td></tr></table></figure>
+
+<p>使用<strong>生产者与消费者的模式</strong>进行线程之间的通信。因为多线程特征为**<code>共享堆、不共享栈</code>**，可以把这句话理解为 共享全局资源、不共享函数内资源。<code>demo</code>中的列表<code>name_list</code>如果采用多线程的方式只属于调用该函数的线程独有，其他子线程无法访问。运行上述<code>demo</code>输出如图<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243429.png" alt="image-20230417201915634"></p>
+<p>但是如果不适用<code>queue</code>采用消费者的模式，直接让线程<code>t2</code>访问<code>name_list</code>资源的话如图<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243450.png" alt="image-20230417202156715"></p>
+<p>Pycharm直接报错，当然可以将<code>name_list</code>直接设置为全局变量，但如果场景为爬虫，<code>url_list</code>对应全局变量，存储需要爬取或爆破的url，但需要使用多线程爬访问爬取<code>url</code>的<code>html</code>页面，将<code>生产者()</code>函数定义为爬取，将<code>生产者()</code>函数定义为消费者，负责解析爬取回来的数据。这个时候就需要用到<code>queue</code>模式，让其中一个线程可以消费到另一个函数产生的值。</p>
+<h3 id="多进程multiprocessing库的学习"><a href="#多进程multiprocessing库的学习" class="headerlink" title="多进程multiprocessing库的学习"></a>多进程multiprocessing库的学习</h3><h4 id="多线程与多进程的概念区别"><a href="#多线程与多进程的概念区别" class="headerlink" title="多线程与多进程的概念区别"></a>多线程与多进程的概念区别</h4><p>多线程比多进程节省资源，但是部分场景下多进程比多线程效率高。</p>
+<p><strong>多进程的特点</strong>：进程与进程之间既不共享堆、也不共享栈。</p>
+<h4 id="函数定义模式与重写Process类模式调用多进程"><a href="#函数定义模式与重写Process类模式调用多进程" class="headerlink" title="函数定义模式与重写Process类模式调用多进程"></a>函数定义模式与重写Process类模式调用多进程</h4><p><strong>函数定义模式调用多进程</strong><code>demo</code>如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_name</span>(<span class="params">name</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span>线程的pid为<span class="subst">&#123;os.getpid()&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;name&#125;</span>线程的父id为<span class="subst">&#123;os.getppid()&#125;</span>&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    p1 = Process(target=print_name,args=(<span class="string">&quot;张三&quot;</span>,))</span><br><span class="line">    p2 = Process(target=print_name,args=(<span class="string">&quot;李四&quot;</span>,))</span><br><span class="line">    p3 = Process(target=print_name,args=(<span class="string">&quot;王五&quot;</span>,))</span><br><span class="line">    p1.start()</span><br><span class="line">    p2.start()</span><br><span class="line">    p3.start()</span><br></pre></td></tr></table></figure>
+
+<p>基本上看与多线程的使用方法一致，但通过引用<code>os</code>库的<code>getpid()</code>与<code>getppid()</code>的方法输出子进程<code>pid</code>号与父进程<code>pid</code>号可以看出区别，该<code>demo</code>输出如下图</p>
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243720.png" alt="image-20230417203635252"></p>
+<p>三个子进程输出的父进程<code>pid</code>均为<code>18336</code>，但三个子进程的<code>pid</code>均不相同。子进程都是由父进程创建的。同理</p>
+<p><strong>重写Process()模式调用多进程</strong><code>demo</code>如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyProcess</span>(<span class="title class_ inherited__">Process</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,name</span>):</span><br><span class="line">        Process.__init__(self)</span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;self.name&#125;</span>线程的pid为<span class="subst">&#123;os.getpid()&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;self.name&#125;</span>线程的父id为<span class="subst">&#123;os.getppid()&#125;</span>&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> [<span class="string">&quot;张三&quot;</span>,<span class="string">&quot;李四&quot;</span>,<span class="string">&quot;王五&quot;</span>]:</span><br><span class="line">        p = MyProcess(name)</span><br><span class="line">        p.start()</span><br></pre></td></tr></table></figure>
+
+<p>输出如下<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243139.png" alt="image-20230417204649677"></p>
+<p><strong>函数调用</strong>与**重写Process()**的多进程使用方法基本与多线程一致，均为创建进城后需使用<code>start()</code>方法启动进程，均可使用<code>join()</code>方法使主进程等待子进程运行完成后再继续下一步运行。</p>
+<h4 id="区别点：生产者消费者模式"><a href="#区别点：生产者消费者模式" class="headerlink" title="区别点：生产者消费者模式"></a>区别点：生产者消费者模式</h4><p>多进程与多线程在我们初阶小白水平看来，只有一个区别<strong>堆和栈的资源均不共享</strong>。</p>
+<p>之前的<code>queue</code>在此处也无法实现两个子进程之间的通信了，需直接使用<code>multiprocessing</code>库中的<code>Queue</code>类进行多进程之间的通信。</p>
+<p>**错误示范-引用<code>queue</code>模块中的<code>Queue()</code>**尝试多进程之间的通信</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">生产者</span>():</span><br><span class="line">    name_list = [<span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>, <span class="string">&#x27;王五&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> q.qsize() &lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> name_list:</span><br><span class="line">            q.put(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;只能容纳两个人的大小&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">消费者</span>():</span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &gt;<span class="number">0</span>:</span><br><span class="line">        name = q.get()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;这是为<span class="subst">&#123;name&#125;</span>提供的食物&#x27;</span>)</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    q = Queue()</span><br><span class="line">    t1 = Process(target=生产者)</span><br><span class="line">    t2 = Process(target=消费者)</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br></pre></td></tr></table></figure>
+
+<p>该错误示范运行时报错截图如下<img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243447.png" alt="image-20230417205456762"></p>
+<p>正确<code>demo</code>如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process,Queue</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">生产者</span>(<span class="params">q</span>):</span><br><span class="line">    name_list = [<span class="string">&#x27;张三&#x27;</span>, <span class="string">&#x27;李四&#x27;</span>, <span class="string">&#x27;王五&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> q.qsize() &lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> name_list:</span><br><span class="line">            q.put(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;只能容纳两个人的大小&quot;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">消费者</span>(<span class="params">q</span>):</span><br><span class="line">    i = <span class="number">3</span></span><br><span class="line">    <span class="keyword">while</span> i &gt;<span class="number">0</span>:</span><br><span class="line">        name = q.get()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;这是为<span class="subst">&#123;name&#125;</span>提供的食物&#x27;</span>)</span><br><span class="line">        i -= <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    q = Queue()</span><br><span class="line">    t1 = Process(target=生产者,args=(q,))</span><br><span class="line">    t2 = Process(target=消费者,args=(q,))</span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br></pre></td></tr></table></figure>
+
+<p>此处，与<strong>多进程</strong>区别在于，需要将 <code>q = Queue()</code>当作参数发送给进程，且函数需要接收该参数才可以。运行截图如下</p>
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243929.png" alt="image-20230417205950989"></p>
+<h3 id="线程池、进程池的使用"><a href="#线程池、进程池的使用" class="headerlink" title="线程池、进程池的使用"></a>线程池、进程池的使用</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>比手动定义多线程、多进程简单方便。线程&#x2F;进程数量有限，不会无限制创建线程和进程数量。可获得函数执行后的结果</p>
+<p>测试<strong>demo</strong>如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor,ProcessPoolExecutor,wait</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_num</span>(<span class="params">num</span>):</span><br><span class="line">    <span class="built_in">print</span>(num)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> num*<span class="number">10</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    start = time.time()</span><br><span class="line">    <span class="keyword">with</span> ThreadPoolExecutor():</span><br><span class="line">        x = [ThreadPoolExecutor().submit(print_num,x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>)]</span><br><span class="line">        wait(x)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;线程池结束&quot;</span>)</span><br><span class="line">        end = time.time()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;耗费时间：&quot;</span>,end-start)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> x :</span><br><span class="line">            <span class="built_in">print</span>(i.result())</span><br><span class="line">    start2 = time.time()</span><br><span class="line">    <span class="keyword">with</span> ProcessPoolExecutor():</span><br><span class="line">        x = [ProcessPoolExecutor().submit(print_num,x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>)]</span><br><span class="line">        wait(x)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;线程池结束&quot;</span>)</span><br><span class="line">        end2 = time.time()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;耗费时间：&quot;</span>, end2 - start2)</span><br></pre></td></tr></table></figure>
+
+<p>运行后输出如图</p>
+<p><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305052243092.png" alt="image-20230505223445648"></p>
+<p>可直接获得函数的返回值，也可以利用 <code>concurrent.futures</code>中的<code>wait()</code>函数来等待线程池、进程池中的线程&#x2F;进程结束完后在继续执行主进程&#x2F;线程，等同于 多线程&#x2F;进程中的<code>join()</code>方法。同时可以使用<code>ThreadPoolExecutor/ProcessPoolExecutor</code>的<code>map()</code>方法直接传参为函数名，参数列表即可。但缺点为不支持直接调用wait()函数。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305051355175.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="http://bliss-blog.oss-cn-beijing.aliyuncs.com/img/202305051355175.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bliss</div><div class="author-info__description">笔记分享</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">基础部分学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-number">1.3.</span> <span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-number">1.4.</span> <span class="toc-text">字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-number">1.5.</span> <span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E8%A1%A5%E5%85%85"><span class="toc-number">1.6.</span> <span class="toc-text">常用函数补充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B-x2F-%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">多线程&#x2F;进程的学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B-threading%E5%BA%93%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.</span> <span class="toc-text">多线程-threading库简单学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%BC%95%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.1.1.</span> <span class="toc-text">可通过函数定义方法的模式引用多线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E9%80%9A%E8%BF%87%E9%87%8D%E5%86%99Thread%E7%B1%BB%E5%BC%95%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">可通过重写Thread类引用多线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#join%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.3.</span> <span class="toc-text">join方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.1.4.</span> <span class="toc-text">守护进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%92%E6%96%A5%E9%94%81%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.5.</span> <span class="toc-text">互斥锁及应用场景学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%9C%BA%E6%99%AF"><span class="toc-number">2.1.6.</span> <span class="toc-text">信号量的学习与场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85queue%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.7.</span> <span class="toc-text">生产者消费者queue学习</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8Bmultiprocessing%E5%BA%93%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.2.</span> <span class="toc-text">多进程multiprocessing库的学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5%E5%8C%BA%E5%88%AB"><span class="toc-number">2.2.1.</span> <span class="toc-text">多线程与多进程的概念区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%BC%8F%E4%B8%8E%E9%87%8D%E5%86%99Process%E7%B1%BB%E6%A8%A1%E5%BC%8F%E8%B0%83%E7%94%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">函数定义模式与重写Process类模式调用多进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB%E7%82%B9%EF%BC%9A%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.3.</span> <span class="toc-text">区别点：生产者消费者模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E3%80%81%E8%BF%9B%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">线程池、进程池的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">2.3.1.</span> <span class="toc-text">优点</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Bliss</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>
